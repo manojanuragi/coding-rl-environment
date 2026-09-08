@@ -1,0 +1,4 @@
+# Pinned for CI reproducibility. If you bump one of these, bump it in the
+# Docker image too and re-run the full suite locally first.
+pytest==7.4.4
+pytest-cov==5.0.0

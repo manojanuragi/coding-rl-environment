@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orderflow"
+version = "0.4.2"
+description = "Order pricing engine (subtotal / discounts / shipping / tax)"
+requires-python = ">=3.11"
+
+[tool.setuptools]
+packages = ["orderflow"]

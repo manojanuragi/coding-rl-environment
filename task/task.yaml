@@ -1,0 +1,67 @@
+id: ordf-247-discount-shipping-pricing-bug
+name: "Order totals wrong with stacked discount codes"
+category: repository_level_debugging_and_multi_file_implementation
+tags:
+  - build-system-failure
+  - dependency-pin
+  - multi-file-bugfix
+  - business-logic
+  - python
+  - decimal-arithmetic
+
+difficulty: medium-hard
+estimated_human_time_minutes: 45
+
+# What the agent actually has to do, in order. The environment doesn't
+# enforce this ordering (grading only looks at end state), but a solve that
+# skips step 1 usually can't get anywhere, and that's on purpose.
+scope:
+  - Diagnose and fix a broken pinned dependency in requirements-dev.txt that
+    currently prevents the test suite from installing at all.
+  - Diagnose a business-logic bug in the discount-stacking behavior
+    (orderflow/discounts.py).
+  - Diagnose a second, independent business-logic bug in how discounts
+    interact with shipping cost (orderflow/engine.py) -- not hinted at by
+    any visible failing test, only by the bug report text and the spec doc.
+  - Leave existing input validation and the documented pricing policy intact.
+
+required_tool_usage:
+  - shell (installing dependencies, running pytest)
+  - file read/search across multiple modules (orderflow/discounts.py,
+    orderflow/engine.py, orderflow/shipping.py, docs/PRICING_RULES.md,
+    tests/test_pricing.py)
+  - file edit across at least two non-adjacent source files
+
+repo_root: environment/repo
+entrypoint_test_command: "pytest -q tests/test_pricing.py"
+grading_script: tests/verifier/grade.py
+
+# Deliberately not exposed to the agent -- see tests/verifier/ and
+# analysis/grader_attacks.md for why, and README.md ("Oracle Strategy") for
+# how grading actually works.
+hidden_from_agent:
+  - solution/reference_solution/
+  - tests/verifier/
+
+environment:
+  language: python
+  language_version: "3.11.9"
+  os_base_image: "python:3.11.9-slim-bookworm"
+  network_access_required: false
+  time_limit_seconds: 900
+  memory_limit_mb: 1024
+
+scoring:
+  type: binary_with_partial_credit_reported
+  binary_pass_condition: >
+    requirements-dev.txt installs cleanly AND every test in the restored
+    tests/test_pricing.py passes AND every test in the hidden
+    tests/verifier/test_hidden_pricing.py passes.
+  partial_credit_metric: fraction of tests/verifier/test_hidden_pricing.py
+    test cases passing (reported for analysis; not used to award a
+    fractional "solve")
+
+known_bug_count: 2
+known_bug_locations:
+  - orderflow/discounts.py
+  - orderflow/engine.py

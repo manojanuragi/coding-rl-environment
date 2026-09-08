@@ -1,0 +1,50 @@
+{
+  "submission": "/Users/manojanuragi/Downloads/coding-rl-environment/solution/reference_solution",
+  "scratch_dir": "/var/folders/yh/54tb0pdj3_12fgb4vv_4bn_w0000gn/T/ordf247-grade-3u62u1zh",
+  "steps": {
+    "pip_install_package": {
+      "returncode": 0,
+      "output": ""
+    },
+    "pip_install_dev": {
+      "returncode": 0,
+      "output": ""
+    },
+    "pytest_regression": {
+      "returncode": 0,
+      "output": "......                                                                   [100%]\n- generated xml file: /var/folders/yh/54tb0pdj3_12fgb4vv_4bn_w0000gn/T/ordf247-grade-3u62u1zh/regression.xml -\n6 passed in 0.02s\n"
+    },
+    "pytest_hidden": {
+      "returncode": 0,
+      "output": "................                                                         [100%]\n- generated xml file: /var/folders/yh/54tb0pdj3_12fgb4vv_4bn_w0000gn/T/ordf247-grade-3u62u1zh/hidden.xml -\n16 passed in 0.02s\n"
+    }
+  },
+  "regression": {
+    "tests.test_pricing::test_no_discount_charges_full_price_and_waives_shipping_over_threshold": "passed",
+    "tests.test_pricing::test_single_flat_discount": "passed",
+    "tests.test_pricing::test_single_percent_discount": "passed",
+    "tests.test_pricing::test_two_percent_discounts_do_not_compound": "passed",
+    "tests.test_pricing::test_discount_floors_at_zero_never_goes_negative": "passed",
+    "tests.test_pricing::test_rejects_zero_quantity_line_item": "passed"
+  },
+  "hidden": {
+    "tests.verifier.test_hidden_pricing::test_regression_no_discount": "passed",
+    "tests.verifier.test_hidden_pricing::test_regression_single_flat_discount": "passed",
+    "tests.verifier.test_hidden_pricing::test_regression_discount_floors_at_zero": "passed",
+    "tests.verifier.test_hidden_pricing::test_percent_discounts_use_best_only_not_compounded": "passed",
+    "tests.verifier.test_hidden_pricing::test_three_percent_discounts_still_picks_a_single_best": "passed",
+    "tests.verifier.test_hidden_pricing::test_shipping_is_never_discounted": "passed",
+    "tests.verifier.test_hidden_pricing::test_free_shipping_threshold_uses_pre_discount_subtotal": "passed",
+    "tests.verifier.test_hidden_pricing::test_both_bugs_combined_realistic_cart": "passed",
+    "tests.verifier.test_hidden_pricing::test_flat_and_percent_combined_matches_spec_worked_example": "passed",
+    "tests.verifier.test_hidden_pricing::test_multiple_flat_discounts_stack_with_one_percent_mixed_categories": "passed",
+    "tests.verifier.test_hidden_pricing::test_exactly_at_free_shipping_threshold_international": "passed",
+    "tests.verifier.test_hidden_pricing::test_just_under_free_shipping_threshold_international": "passed",
+    "tests.verifier.test_hidden_pricing::test_digital_category_tax_rate_and_percent_discount": "passed",
+    "tests.verifier.test_hidden_pricing::test_negative_unit_price_still_rejected": "passed",
+    "tests.verifier.test_hidden_pricing::test_percent_discount_over_100_still_rejected": "passed",
+    "tests.verifier.test_hidden_pricing::test_unknown_discount_kind_still_rejected": "passed"
+  },
+  "verdict": "PASS",
+  "score": 1.0
+}

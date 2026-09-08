@@ -1,0 +1,4 @@
+# orderflow has no runtime dependencies outside the standard library.
+# Keep it that way if you can -- this package gets imported by both the
+# checkout service and the batch reconciliation job, and we don't want a
+# dependency bump in one of those to be gated on the other.
