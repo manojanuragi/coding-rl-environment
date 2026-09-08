@@ -15,7 +15,17 @@ solution/reference_solution/  a fixed copy of the repo (hidden from the agent)
 tests/verifier/                the hidden test suite + grading script (hidden from the agent)
 analysis/grader_attacks.md    red-team attempts against the grader, with real results
 analysis/model_runs.md        real pass@k data from two models, six runs
+analysis/sample_runs/         sample grade.py output JSON, one per repo variant
 ```
+
+## Sample grading output
+
+`analysis/sample_runs/` holds two raw JSON files produced by running `tests/verifier/grade.py` directly against the two repo variants already in this tree, so a reader can see the grader's actual output shape without having to execute it themselves:
+
+- `grade_buggy_repo.json`  `grade.py` run against `environment/repo/` (the unfixed, agent-facing starting state). Verdict `FAIL`, score `0.0`the grader stops at the dependency-install step because `requirements-dev.txt` pins a nonexistent `pytest==99.0.0`, exactly the blocker described above under "Build/dependency debugging as a prerequisite."
+- `grade_reference_solution.json`  `grade.py` run against `solution/reference_solution/` (the fixed copy). Verdict `PASS`, score `1.0`all 6 regression tests and all 16 hidden tests pass.
+
+These two files are a worked example of the "behavior, not text" oracle strategy described below: same grading script, same hidden test files, run twice against two different source trees, producing the pass/fail contrast the rest of this document argues for.
 
 ## Capability mapping
 
